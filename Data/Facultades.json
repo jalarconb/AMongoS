@@ -1,0 +1,11 @@
+[{"id_facultad":1,"id_sede":2,"nombre":"Artes","email":"artes@universidad.com"},
+{"id_facultad":2,"id_sede":2,"nombre":"Ciencias","email":"ciencias@universidad.com"},
+{"id_facultad":3,"id_sede":2,"nombre":"Ciencias Agrarias","email":"cienciasagrarias@universidad.com"},
+{"id_facultad":4,"id_sede":2,"nombre":"Ciencias Económicas","email":"cienciaseconomicas@universidad.com"},
+{"id_facultad":5,"id_sede":2,"nombre":"Ciencias Humanas","email":"cienciashumanas@universidad.com"},
+{"id_facultad":6,"id_sede":2,"nombre":"Ciencias Políticas y Sociales","email":"derecho@universidad.com"},
+{"id_facultad":7,"id_sede":2,"nombre":"Enfermería","email":"enfermeria@universidad.com"},
+{"id_facultad":8,"id_sede":2,"nombre":"Ingeniería","email":"ingenieria@universidad.com"},
+{"id_facultad":9,"id_sede":2,"nombre":"Medicina","email":"medicina@universidad.com"},
+{"id_facultad":10,"id_sede":2,"nombre":"Medicina Veterinaria y Zootecnia","email":"medicinaveterinaria@universidad.com"},
+{"id_facultad":11,"id_sede":2,"nombre":"Odontologia","email":"odontologia@universidad.com"}]

@@ -1,0 +1,3 @@
+dbpath=D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster\data2\db
+logpath=D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster\data2\log\mongod.log
+port=27030
