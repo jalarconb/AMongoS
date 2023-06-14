@@ -1,10 +1,3 @@
-https://youtu.be/2GN2w9X7FBQ
-
-aaaaaaa   https://youtu.be/VPA413X8h9M
-
---------------------------------------------------
-
-
 # SETUP INICIAL DE INSTANCIA EN AWS
 
 
@@ -14,7 +7,7 @@ aaaaaaa   https://youtu.be/VPA413X8h9M
 Ya estando registrado y logueado en una cuenta de AWS, es necesario dirigirse a [AWS Lightsail](https://lightsail.aws.amazon.com/ls/webapp/home). Allí crearemos una instancia con las siguientes características:
 
 
-_Ver imagen "AWSInstance.png"_
+![AWSInstance](../Screenshots/AWSInstance.png)
 
 
 
@@ -24,7 +17,7 @@ _Ver imagen "AWSInstance.png"_
 Es necesario que la instancia tenga una _IP pública estática_ para faciltiar los procesos de conexión entre los diferentes elementos del sistema. Al entrar en la instancia, seguir este orden de menús y activar la IP estática:
 
 
-_Ver imagen "AWSStaticIP.png"_
+![AWSStaticIP](../Screenshots/AWSStaticIP.png)
 
 
 
@@ -34,7 +27,7 @@ _Ver imagen "AWSStaticIP.png"_
 El puerto por defecto de mongo es el _27017_. En el mismo menú en el que asignamos la _IP pública estática_ debemos indicar este puerto explícitamente para que quede abierto:
 
 
-_Ver imagen "AWSOpenPort.png"_
+![AWSOpenPort](../Screenshots/AWSOpenPort.png)
 
 
 
@@ -122,6 +115,12 @@ security:
   authorization: "enabled"
 ```
 
+También, buscar la etiqueta _#replication:_ y hacer el mismo proceso. En este caso, _"ReplicaName"_ es el nombre del Replica Set que deseemos. Debe quedar así:
+```conf
+replication:
+  replSetName: "ReplicaName"
+```
+
 
 Luego hay que buscar la etiqueta _"#network interfaces"_. En el atributo _bindIp_ se debe agregar la _IP privada_ de la instancia. Suponiendo que la IP es _"XXX.XXX.XXX.XXX"_, la línea debería quedar así:
 ```conf
@@ -142,7 +141,7 @@ sudo apt install mongosh
 
 **Este proceso de creación de instancia debe realizarse 3 veces para así crear 3 instancias que harán las veces de nodo en nuestro cluster**
 
-
+---
 
 # SETUP DE REPLICA SET EN AWS
 
@@ -157,27 +156,46 @@ _username_ y _password_ se deben reemplazar por los valores asignados al crear e
 
 
 
+## Configuración del Replica Set
 
+### Agregar el nodo primario
 
-----------------------
+Ingresar a la consola de Mongo en la instancia que queramos que quede de _PRIMARY_ y ejecutamos los comandos _2_ y _3_ en donde _XXX.XXX.XXX.XXX_ es la _IP pública estática_ de la instancia en la que estamos actualmente y _PPPP_ es el puerto que dejamos asignado (_27017_, por defecto):
+```sh
+mongo
 
-
-
-agregué "_replSetName: "AMongoS"_" al config
-
-Apagué el auth en config
-
-Agregué las dos IPs en config?
-
-
-Esto en AWS-2 (que quedó de primario xd) para iniciarlizar el cluster
-```
-rsconf={_id:"AMongoS",members:[{_id:0,host:"54.158.219.30:27017"}]}
+rsconf={_id:"ReplicaName",members:[{_id:0,host:"XXX.XXX.XXX.XXX:PPPP"}]}
 
 rs.initiate(rsconf)
 ```
 
-Esto en AWS-2 para las IP privadas de 1 y 3 para agregarlos al cluster
+Ahora, usamos este comando para ver que el Replica Set ya tiene un miembro:
+```sh
+rs.status()
 ```
-rs.add("172.26.5.244:27017")
+
+### Agregar los nodos secundarios
+
+En el mismo nodo que dejamos de primario, ejecutamos esto:
 ```
+rs.add("XXX.XXX.XXX.XXX:PPPP")
+```
+Aquí, la _IP_ es la _IP privada_ de cada nodo y su respectivo _puerto_.
+
+
+
+# Conexión desde MongoDBCompass
+
+Es posible también conectarse a los nodos del cluster a través de MongoDBCompass. Para ello, basta con escribir un string de conexión como el siguiente:
+```
+mongodb://user:password@XXX.XXX.XXX.XXX:PPPP/
+```
+Reemplazar así:
+- _user_: Usuario creado en el proceso de autenticación.
+- _password_: Contraseña creada en el proceso de autenticación.
+- _XXX.XXX.XXX.XXX_: IP pública estática del nodo deseado.
+- _PPPP_: Puerto abierto del nodo deseado.
+
+---
+
+Anexo basado en tutorial de: https://youtu.be/2GN2w9X7FBQ

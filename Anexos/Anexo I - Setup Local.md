@@ -7,9 +7,9 @@
 ## Setup de Mongo y del Ambiente
 
 
-Este es el directorio raíz. Moverse a él:
+Tendremos un directorio raíz para toda la implementación. En este caso, se llamará _ReplicaSet Cluster_ y estará directamente en el disco _C_. Moverse a él:
 ```bat
-cd D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster
+cd C:\ReplicaSet Cluster
 ```
 
 
@@ -69,7 +69,7 @@ _Ahora, ejecutar un **"show dbs"** debería mostrar algo._
 
 Ahora, vamos a volver a ejecutar aquí el daemon, pero ahora con valores de _dbpath_, _logpath_ y _port_ diferentes:
 ```bat
-mongod --dbpath "D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster\data1\db" --logpath "D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster\data1\log\mongod.log" --port 27020 --storageEngine=wiredTiger --journal --replSet replicaSA
+mongod --dbpath "C:\ReplicaSet Cluster\data1\db" --logpath "C:\ReplicaSet Cluster\data1\log\mongod.log" --port 27020 --storageEngine=wiredTiger --journal --replSet replicaSA
 ```
 
 
@@ -81,7 +81,7 @@ mongod --dbpath "D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\Repl
 
 La misma idea del nodo secundario \#1:
 ```bat
-mongod --dbpath "D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster\data2\db" --logpath "D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\ReplicaSet Cluster\data2\log\mongod.log" --port 27030 --storageEngine=wiredTiger --journal --replSet replicaSA
+mongod --dbpath "C:\ReplicaSet Cluster\data2\db" --logpath "C:\ReplicaSet Cluster\data2\log\mongod.log" --port 27030 --storageEngine=wiredTiger --journal --replSet replicaSA
 ```
 
 
@@ -94,7 +94,7 @@ mongod --dbpath "D:\Juan\UN\Semestre XIII\Bases de Datos Avanzadas\Proyecto\Repl
 Si en este momento escribimos el comando _rs.status()_, va a salirnos la información del cluster. Lo importante es que en _members_ solo va a haber uno. Solo va a estar el nodo principal que añadimos al ejecutar el _rsconfig_ anteriormente.
 
 
-_Ver imagen "ReplicaSetStatusPRIM.png"_
+![ReplicaSetStatusPRIM](../Screenshots/ReplicaSetStatusPRIM.png)
 
 
 Entonces toca agregar los otros dos nodos. Se usa este comando; Simplemente agrega lo que está en esos hosts (que es el nodo secundario \#1 y \#2, respectivamente):
@@ -106,8 +106,8 @@ rs.add("localhost:27030")
 
 Ahora, si ejecutamos otra vez _rs.status()_ deberían aparecer los 3 nodos. El primario que ya estaba y los dos secundarios que acabamos de agregar:
 
-_Ver imagen "ReplicaSetStatusSEC1.png"_
-_Ver imagen "ReplicaSetStatusSEC2.png"_
+![ReplicaSetStatusSEC1](../Screenshots/ReplicaSetStatusSEC1.png)
+![ReplicaSetStatusSEC1](../Screenshots/ReplicaSetStatusSEC2.png)
 
 
 
@@ -145,7 +145,7 @@ use SistemaAcademico
 
 Creamos una nueva colección _Prueba_:
 ```bat
-db.Prueba.insert({"name":"Testxd"})
+db.Prueba.insert({"name":"dato de prueba <:"})
 ```
 
 

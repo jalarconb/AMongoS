@@ -1,8 +1,3 @@
-https://www.youtube.com/watch?v=QN-qw5Eqiew&list=PLLwY9YsWZ6icHVhs8D4j54A5jeMGcYSsH&index=1
-
------------------------------------
-
-
 # SETUP DEL CONECTOR BI EN MONGODB (Replica Set Local - Windows)
 
 Para poder realizar una conexión con Power BI es necesario tener algunas herramientas y realizar algunas configuraciones adicionales.
@@ -58,3 +53,22 @@ Ejecutar los siguientes comandos:
 net start mongosql
 ```
 En caso de ser necesario, cambiar los paths del primer comando.
+
+
+### Agregar a Orígenes de datos ODBC
+
+- Buscar un programa en Windows llamado _Orígenes de Datos OBDC_. Ejecutarlo.
+- Ir a la pestaña _DSN del Sistema_.
+- Dar click en _Agregar..._
+- Escoger el origen de tipo _MongoDB ODBC 1.4.3 Unicode Driver_. Dar en _Finalizar_.
+- _Data Source Name_ puede ser cualquier cosa. _TCP/IP Server_ es _localhost_ y el puerto será el _3307_. Escoger en _Database_ la base de datos que se quiere usar.
+- (Opcional) Usar _Test_ para ver que la conexión funciona.
+
+
+### Conexión desde Power BI
+
+Una vez creado el origen de datos, al intentar conectar una nueva fuente de datos de tipo _ODBC_ en power BI, debería aparecer este origen en un menú desplegable.
+
+---
+
+Anexo basado en el tutorial de: https://www.youtube.com/watch?v=QN-qw5Eqiew&list=PLLwY9YsWZ6icHVhs8D4j54A5jeMGcYSsH
