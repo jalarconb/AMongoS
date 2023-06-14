@@ -1,12 +1,3 @@
-https://www.youtube.com/watch?v=gChzfhVGqp8
-
-https://www.youtube.com/watch?v=1t7D8tVSaiY
-
-_Este es el weno:_
-https://www.youtube.com/watch?v=91PCBRJxkh0
-
-
---------------------------------------------------
 # SETUP INICIAL Y PUESTA EN MARCHA DEL REPLICA SET LOCAL (Windows)
 
 
@@ -156,3 +147,16 @@ Creamos una nueva colección _Prueba_:
 ```bat
 db.Prueba.insert({"name":"Testxd"})
 ```
+
+
+## Conexión con MongoDBCompass
+
+Es posible también conectarse a los nodos del cluster a través de MongoDBCompass. Para ello, basta con escribir un string de conexión como el siguiente:
+```
+mongodb://localhost:27017/
+```
+
+
+---
+
+Anexo basado en el tutorial de: https://www.youtube.com/watch?v=91PCBRJxkh0
